@@ -13,7 +13,7 @@ export default function InfoSection() {
     {
       icon: Clock,
       label: "Horário",
-      value: "08h às 09h30",
+      value: "08h 30 às 10h",
       subtext: "Horário de Brasília",
       highlight: false,
     },
