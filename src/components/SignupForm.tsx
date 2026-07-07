@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion } from "motion/react";
-import { ArrowRight, Loader2, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowRight, Loader2, Sparkles, CheckCircle2, XCircle } from "lucide-react";
 import { Participant } from "../types";
 
 interface SignupFormProps {
@@ -14,6 +14,11 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  // Elegant feedback modal states
+  const [showStatusModal, setShowStatusModal] = useState(false);
+  const [modalStatus, setModalStatus] = useState<"loading" | "success" | "error">("loading");
+  const [modalMessage, setModalMessage] = useState("");
 
   // Format phone number as Brazilian WhatsApp template: (XX) XXXXX-XXXX
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,55 +61,11 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
     }
 
     setIsSubmitting(true);
+    setShowStatusModal(true);
+    setModalStatus("loading");
+    setModalMessage("Garantindo seu acesso exclusivo...");
 
     const calendarUrl = "https://calendar.app.google/UYp6Y9TtoW5Xd2L36";
-    // Abre uma nova aba de forma síncrona para evitar que o bloqueador de popups impeça a abertura
-    const calendarWindow = window.open("", "_blank");
-    if (calendarWindow) {
-      calendarWindow.document.write(`
-        <html>
-          <head>
-            <title>Redirecionando para a Agenda...</title>
-            <style>
-              body {
-                background-color: #050505;
-                color: #f1f5f9;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                margin: 0;
-              }
-              .spinner {
-                border: 3px solid rgba(255, 255, 255, 0.1);
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                border-left-color: #3b82f6;
-                animation: spin 1s linear infinite;
-                margin-bottom: 20px;
-              }
-              @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-              }
-              p {
-                font-size: 14px;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
-                color: #94a3b8;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="spinner"></div>
-            <p>Confirmando sua inscrição e abrindo a agenda...</p>
-          </body>
-        </html>
-      `);
-    }
 
     try {
       const newParticipant: Participant = {
@@ -121,26 +82,28 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
       try {
         await addDoc(collection(db, "registrations"), newParticipant);
       } catch (error) {
-        if (calendarWindow) calendarWindow.close();
+        setShowStatusModal(false);
         handleFirestoreError(error, OperationType.CREATE, "registrations");
+        throw error;
       }
 
       // Save to localStorage
       localStorage.setItem("commercial_ai_workshop_registration", JSON.stringify(newParticipant));
 
-      // Direct redirect in the new window, or fallback to current window if blocked
-      if (calendarWindow) {
-        calendarWindow.location.href = calendarUrl;
-      } else {
+      setModalStatus("success");
+      setModalMessage("Inscrição confirmada com sucesso! Abrindo calendário...");
+
+      // Elegant delay to appreciate the success visual transition, then direct redirect in same tab
+      setTimeout(() => {
         window.location.href = calendarUrl;
-      }
+      }, 1800);
       
       setIsSubmitting(false);
       onSuccess(newParticipant);
     } catch (error) {
-      if (calendarWindow) calendarWindow.close();
       console.error("Error adding document: ", error);
-      setErrorMsg("Ocorreu um erro ao salvar sua inscrição. Tente novamente.");
+      setModalStatus("error");
+      setModalMessage("Ocorreu um erro ao salvar sua inscrição. Tente novamente.");
       setIsSubmitting(false);
     }
   };
@@ -273,6 +236,89 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
           </motion.form>
         </div>
       </div>
+
+      {/* Elegant Premium Feedback Modal */}
+      <AnimatePresence>
+        {showStatusModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative max-w-sm w-full p-8 rounded-2xl bg-slate-900/90 border border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden text-center flex flex-col items-center gap-6"
+            >
+              {/* Premium Top Glow Light */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none" />
+
+              {/* Status Icon with custom gradient ring */}
+              <div className="relative flex items-center justify-center w-16 h-16 rounded-full bg-white/[0.02] border border-white/10">
+                {modalStatus === "loading" && (
+                  <Loader2 className="w-8 h-8 text-emerald-400 animate-spin" />
+                )}
+                {modalStatus === "success" && (
+                  <motion.div
+                    initial={{ scale: 0.5, rotate: -45 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                  >
+                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                  </motion.div>
+                )}
+                {modalStatus === "error" && (
+                  <motion.div
+                    initial={{ scale: 0.5 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                  >
+                    <XCircle className="w-8 h-8 text-red-400" />
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Text Information */}
+              <div className="space-y-2">
+                <h3 className="text-lg font-display font-medium text-white tracking-tight">
+                  {modalStatus === "loading" && "Processando..."}
+                  {modalStatus === "success" && "Sucesso!"}
+                  {modalStatus === "error" && "Ops!"}
+                </h3>
+                <p className="text-sm text-gray-400 leading-relaxed font-sans">
+                  {modalMessage}
+                </p>
+              </div>
+
+              {/* Fallback button if error */}
+              {modalStatus === "error" && (
+                <button
+                  onClick={() => setShowStatusModal(false)}
+                  className="px-6 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer"
+                >
+                  Fechar
+                </button>
+              )}
+
+              {/* Progress Bar / Redirect indicator */}
+              {modalStatus === "success" && (
+                <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden mt-2">
+                  <motion.div
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1.8, ease: "easeInOut" }}
+                    className="h-full bg-gradient-to-r from-emerald-500 to-blue-500"
+                  />
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
