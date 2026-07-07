@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-brand-blue: #2563eb;
+  --color-brand-glow: rgba(37, 99, 235, 0.15);
+  --color-brand-cyan: #06b6d4;
+  --color-brand-bg: #050505;
+  --color-brand-card: rgba(255, 255, 255, 0.03);
+}
+
+/* Custom premium elements */
+html {
+  scroll-behavior: smooth;
+  background-color: #050505;
+  color: #f3f4f6;
+}
+
+/* Sophisticated metallic glowing scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #111827;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+

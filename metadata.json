@@ -1,0 +1,6 @@
+{
+  "name": "Workshop IA na Capacitação Comercial",
+  "description": "Landing page premium para inscrição no workshop gratuito sobre IA aplicada ao treinamento e desenvolvimento de equipes comerciais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
