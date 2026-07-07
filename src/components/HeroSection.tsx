@@ -57,7 +57,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-5xl md:text-6.5xl font-display font-bold text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 max-w-4xl"
+          className="text-[40px] sm:text-5xl md:text-6.5xl font-display font-bold text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 max-w-4xl"
         >
           Como a <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">IA</span> pode <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">capacitar</span> seus vendedores e liberar seus gestores para o que <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">realmente</span> importa.
         </motion.h1>

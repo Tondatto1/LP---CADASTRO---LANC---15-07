@@ -123,7 +123,7 @@ vec2 sceneC(vec2 frag, vec2 r) {
   float z = 0.0;
   float d = 1e3;
   vec4 O = vec4(0.0);
-  for (int k = 0; k < 39; k++) {
+  for (int k = 0; k < 24; k++) {
     if (d <= 1e-4) break;
     O = z * normalize(vec4(P, uZoom, 0.0)) - vec4(0.0, 4.0, 1.0, 0.0) / 4.5;
     d = 1.0 - sqrt(length(O * O));
@@ -221,13 +221,22 @@ const Lightfall: React.FC<LightfallProps> = ({
   const rendererRef = useRef<Renderer | null>(null);
   const mouseTargetRef = useRef<[number, number]>([0, 0]);
   const lastTimeRef = useRef(0);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    // Detect mobile and touch capabilities to restrict pixel density & touch listening
+    const isMobileDevice = typeof window !== 'undefined' && 
+      (window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+    const calculatedDpr = dpr ?? (typeof window !== 'undefined' 
+      ? (isMobileDevice ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.2)) 
+      : 1);
+
     const renderer = new Renderer({
-      dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
+      dpr: calculatedDpr,
       alpha: true,
       antialias: true
     });
@@ -267,7 +276,7 @@ const Lightfall: React.FC<LightfallProps> = ({
       uZoom: { value: zoom },
       uBgGlow: { value: backgroundGlow },
       uOpacity: { value: opacity },
-      uMouseEnabled: { value: mouseInteraction ? 1 : 0 },
+      uMouseEnabled: { value: (mouseInteraction && !isMobileDevice) ? 1 : 0 },
       uMouseStrength: { value: mouseStrength },
       uMouseRadius: { value: mouseRadius }
     };
@@ -290,6 +299,15 @@ const Lightfall: React.FC<LightfallProps> = ({
     const ro = new ResizeObserver(resize);
     ro.observe(container);
 
+    // Setup IntersectionObserver to track if the element is inside the viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(container);
+
     const onPointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       const scale = renderer.dpr || 1;
@@ -300,12 +318,16 @@ const Lightfall: React.FC<LightfallProps> = ({
         uniforms.iMouse.value = [x, y];
       }
     };
-    if (mouseInteraction) {
+    if (mouseInteraction && !isMobileDevice) {
       canvas.addEventListener('pointermove', onPointerMove);
     }
 
     const loop = (t: number) => {
       rafRef.current = requestAnimationFrame(loop);
+      
+      // Completely skip calculations & rendering when out of viewport or paused
+      if (!isVisibleRef.current || paused) return;
+
       uniforms.iTime.value = t * 0.001;
       if (mouseDampening > 0) {
         if (!lastTimeRef.current) lastTimeRef.current = t;
@@ -321,7 +343,7 @@ const Lightfall: React.FC<LightfallProps> = ({
       } else {
         lastTimeRef.current = t;
       }
-      if (!paused && programRef.current && meshRef.current) {
+      if (programRef.current && meshRef.current) {
         try {
           renderer.render({ scene: meshRef.current });
         } catch (e) {
@@ -333,8 +355,9 @@ const Lightfall: React.FC<LightfallProps> = ({
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      if (mouseInteraction) canvas.removeEventListener('pointermove', onPointerMove);
+      if (mouseInteraction && !isMobileDevice) canvas.removeEventListener('pointermove', onPointerMove);
       ro.disconnect();
+      observer.disconnect();
       if (canvas.parentElement === container) {
         container.removeChild(canvas);
       }
