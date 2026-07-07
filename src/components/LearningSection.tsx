@@ -53,7 +53,7 @@ export default function LearningSection() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-white tracking-tight leading-tight"
           >
-            Módulos
+            Temas
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -96,20 +96,13 @@ export default function LearningSection() {
 
                   {/* Card Content with elegant geometric border and dark glass design */}
                   <div className="relative p-6 sm:p-8 bg-white/[0.02] border border-white/5 rounded-lg hover:border-emerald-500/30 hover:bg-white/[0.04] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(16,185,129,0.03)]">
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
-                      <div className="flex items-center gap-4">
-                        <div className="inline-flex items-center justify-center p-2 rounded bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 group-hover:text-emerald-300 group-hover:border-emerald-500/20 transition-all duration-300">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <span className="text-xs font-mono font-bold text-emerald-500/70 tracking-widest uppercase">
-                          Módulo {topic.number}
-                        </span>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="inline-flex items-center justify-center p-2 rounded bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 group-hover:text-emerald-300 group-hover:border-emerald-500/20 transition-all duration-300">
+                        <Icon className="w-4 h-4" />
                       </div>
-                      
-                      <div className="inline-flex items-center gap-1.5 text-[10px] text-emerald-400/80 font-mono">
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        <span>Confirmado</span>
-                      </div>
+                      <span className="text-xs font-mono font-bold text-emerald-500/70 tracking-widest uppercase">
+                        Tema {topic.number}
+                      </span>
                     </div>
 
                     <h3 className="text-xl font-semibold text-white tracking-tight mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-teal-400 transition-all duration-300">

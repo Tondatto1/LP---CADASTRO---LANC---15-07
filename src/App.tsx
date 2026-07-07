@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Sparkles, ArrowUpRight, Cpu, ShieldAlert, BadgeInfo } from "lucide-react";
 import HeroSection from "./components/HeroSection";
 import InfoSection from "./components/InfoSection";
+import SpeakersSection from "./components/SpeakersSection";
 import LearningSection from "./components/LearningSection";
 import SignupForm from "./components/SignupForm";
 import { Participant } from "./types";
@@ -55,10 +56,16 @@ export default function App() {
               Programação
             </button>
             <button 
+              onClick={() => handleScrollTo("palestrantes")} 
+              className="hover:text-emerald-400 transition-colors cursor-pointer focus:outline-none"
+            >
+              Palestrantes
+            </button>
+            <button 
               onClick={() => handleScrollTo("modulos")} 
               className="hover:text-emerald-400 transition-colors cursor-pointer focus:outline-none"
             >
-              Módulos
+              Temas
             </button>
             <button 
               onClick={() => handleScrollTo("cadastro-section")} 
@@ -88,6 +95,9 @@ export default function App() {
 
         {/* Dobra 2: Info Cards */}
         <InfoSection />
+
+        {/* Dobra 2.5: Palestrantes Section */}
+        <SpeakersSection />
 
         {/* Dobra 3: Learning Tópicos */}
         <LearningSection />
