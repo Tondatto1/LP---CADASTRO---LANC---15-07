@@ -76,14 +76,11 @@ export default function App() {
           </nav>
 
           <div>
-            <button
-              onClick={handleCtaClick}
-              id="header-cta-btn"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-emerald-500/30 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-emerald-400 hover:text-white hover:from-emerald-500/20 hover:to-blue-600/20 font-mono text-[10px] uppercase tracking-[0.15em] font-semibold transition-all duration-300 cursor-pointer"
+            <div
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-emerald-500/30 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-emerald-400 font-mono text-[10px] uppercase tracking-[0.15em] font-semibold select-none"
             >
-              <span>Confirmar presença</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
-            </button>
+              <span>Workshop Gratuito</span>
+            </div>
           </div>
         </div>
       </header>
