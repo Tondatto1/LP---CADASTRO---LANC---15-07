@@ -196,7 +196,7 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
             {/* E-mail */}
             <div className="space-y-1.5">
               <label htmlFor="email-input" className="block text-[10px] uppercase tracking-widest text-gray-400 ml-1 font-mono">
-                E-mail Corporativo
+                SEU MELHOR EMAIL
               </label>
               <input
                 id="email-input"
