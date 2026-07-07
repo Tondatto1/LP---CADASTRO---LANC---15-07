@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onCtaClick }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[85vh] flex flex-col justify-center items-center px-6 py-24 text-center overflow-hidden border-b border-white/10">
+    <section className="relative min-h-[85vh] sm:min-h-screen flex flex-col justify-center items-center px-6 pt-32 pb-20 sm:pt-40 sm:pb-28 text-center overflow-hidden border-b border-white/10">
       {/* Lightfall dynamic background effect */}
       <div className="absolute inset-0 z-0 opacity-40">
         <Lightfall
@@ -44,9 +44,9 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full bg-white/[0.02] text-slate-400 font-mono text-[10px] uppercase tracking-[0.2em] font-semibold mb-8 shadow-[0_0_15px_rgba(255,255,255,0.02)]"
+          className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full bg-white/[0.02] text-slate-400 font-mono text-[10px] uppercase tracking-[0.2em] font-semibold mb-6 sm:mb-8 shadow-[0_0_15px_rgba(255,255,255,0.02)]"
         >
-          <Sparkles className="w-3 h-3 text-blue-400 animate-pulse" />
+          <Sparkles className="w-3 h-3 text-emerald-400 animate-pulse" />
           <span>100% Online</span>
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
           <span>Gratuito</span>
@@ -57,7 +57,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-5xl md:text-6.5xl font-display font-bold text-white tracking-tight leading-[1.1] mb-6 max-w-4xl"
+          className="text-4xl sm:text-5xl md:text-6.5xl font-display font-bold text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 max-w-4xl"
         >
           Como a <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">IA</span> pode <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">capacitar</span> seus vendedores e liberar seus gestores para o que <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">realmente</span> importa.
         </motion.h1>
@@ -67,7 +67,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden sm:block text-white text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto mb-12"
+          className="hidden sm:block text-white text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto mb-10 sm:mb-12"
         >
           Nesta live fechada, você vai descobrir como a IA pode fazer seus vendedores <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">venderem</span> mais e <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">desafogar</span> seus gestores do <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 font-semibold">operacional</span>.
         </motion.p>
@@ -81,7 +81,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           <button
             onClick={onCtaClick}
             id="hero-cta-btn"
-            className="group relative px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all duration-300 shadow-lg shadow-blue-900/30 uppercase tracking-widest text-xs flex items-center gap-3 cursor-pointer overflow-hidden active:scale-98"
+            className="group relative px-10 py-5 bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 hover:from-emerald-400 hover:via-teal-400 hover:to-blue-500 text-white font-bold rounded-lg transition-all duration-300 shadow-[0_4px_20px_rgba(16,185,129,0.25)] hover:shadow-[0_4px_25px_rgba(59,130,246,0.35)] uppercase tracking-widest text-xs flex items-center gap-3 cursor-pointer overflow-hidden active:scale-98 border border-emerald-400/20"
           >
             <span>Confirmar presença</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

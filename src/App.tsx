@@ -35,8 +35,8 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#050505] text-slate-100 font-sans antialiased selection:bg-blue-500/30 selection:text-white">
       {/* Premium Header conforming to Geometric Balance */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-gradient-to-b from-[#020a16] via-[#011c13] to-[#040914]">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 bg-black/10 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-4 sm:py-5 flex items-center justify-between">
           <div className="flex items-center">
             {/* Premium Uploaded Logo (White lettering, transparent background) */}
             <img 
@@ -50,19 +50,19 @@ export default function App() {
           <nav className="hidden md:flex items-center gap-8 text-[10px] font-mono tracking-[0.2em] uppercase text-slate-400">
             <button 
               onClick={() => handleScrollTo("programacao")} 
-              className="hover:text-blue-400 transition-colors cursor-pointer focus:outline-none"
+              className="hover:text-emerald-400 transition-colors cursor-pointer focus:outline-none"
             >
               Programação
             </button>
             <button 
               onClick={() => handleScrollTo("modulos")} 
-              className="hover:text-blue-400 transition-colors cursor-pointer focus:outline-none"
+              className="hover:text-emerald-400 transition-colors cursor-pointer focus:outline-none"
             >
               Módulos
             </button>
             <button 
               onClick={() => handleScrollTo("cadastro-section")} 
-              className="hover:text-blue-400 transition-colors cursor-pointer focus:outline-none"
+              className="hover:text-emerald-400 transition-colors cursor-pointer focus:outline-none"
             >
               Inscrição
             </button>
@@ -72,17 +72,17 @@ export default function App() {
             <button
               onClick={handleCtaClick}
               id="header-cta-btn"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-blue-500/50 rounded-full bg-blue-500/5 text-blue-400 hover:bg-blue-500/10 font-mono text-[10px] uppercase tracking-[0.15em] font-semibold transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-emerald-500/30 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-emerald-400 hover:text-white hover:from-emerald-500/20 hover:to-blue-600/20 font-mono text-[10px] uppercase tracking-[0.15em] font-semibold transition-all duration-300 cursor-pointer"
             >
               <span>Confirmar presença</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-blue-400" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
             </button>
           </div>
         </div>
       </header>
 
       {/* Main Body */}
-      <main className="relative z-10 pt-[88px]">
+      <main className="relative z-10">
         {/* Dobra 1: Hero */}
         <HeroSection onCtaClick={handleCtaClick} />
 

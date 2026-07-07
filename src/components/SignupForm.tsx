@@ -247,12 +247,12 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
               />
             </div>
 
-            {/* Submit Button - Solid Geometric Blue Style */}
+            {/* Submit Button - Green and Metallic Blue Gradient Style */}
             <button
               type="submit"
               disabled={isSubmitting}
               id="confirmar-presenca-btn"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg mt-4 transition-all shadow-lg shadow-blue-900/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2.5 cursor-pointer disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 hover:from-emerald-400 hover:via-teal-400 hover:to-blue-500 text-white font-bold py-4 rounded-lg mt-4 transition-all shadow-[0_4px_20px_rgba(16,185,129,0.2)] hover:shadow-[0_4px_25px_rgba(59,130,246,0.3)] border border-emerald-400/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2.5 cursor-pointer disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>
