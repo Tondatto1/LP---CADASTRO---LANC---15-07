@@ -34,7 +34,7 @@ export default function InfoSection() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-[#020a16] via-[#011c13] to-[#040914] overflow-hidden border-b border-white/10">
+    <section id="programacao" className="relative py-24 px-6 bg-gradient-to-b from-[#020a16] via-[#011c13] to-[#040914] overflow-hidden border-b border-white/10">
       {/* High-End Tech Grid and Metallic Reflections */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-25 pointer-events-none" />
       

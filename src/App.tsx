@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { Sparkles, ArrowUpRight, Cpu, ShieldAlert, BadgeInfo } from "lucide-react";
 import HeroSection from "./components/HeroSection";
@@ -10,11 +10,15 @@ import { Participant } from "./types";
 export default function App() {
   const [participant, setParticipant] = useState<Participant | null>(null);
 
-  const handleCtaClick = () => {
-    const el = document.getElementById("cadastro-section");
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  };
+
+  const handleCtaClick = () => {
+    handleScrollTo("cadastro-section");
   };
 
   const handleRegistrationSuccess = (newParticipant: Participant) => {
@@ -29,24 +33,39 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#050505] text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-blue-500/30 selection:text-white">
+    <div className="relative min-h-screen bg-[#050505] text-slate-100 font-sans antialiased selection:bg-blue-500/30 selection:text-white">
       {/* Premium Header conforming to Geometric Balance */}
-      <header className="relative z-50 w-full border-b border-white/10 bg-[#050505]/60 backdrop-blur-md">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-gradient-to-b from-[#020a16] via-[#011c13] to-[#040914]">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* The signature rotating geometric logo of the theme */}
-            <div className="w-8 h-8 border-2 border-blue-500 rotate-45 flex items-center justify-center">
-              <div className="w-4 h-4 bg-blue-500"></div>
-            </div>
-            <span className="font-display font-bold text-lg tracking-wider text-white uppercase ml-1">
-              Capacitação<span className="text-blue-500">.</span>IA
-            </span>
+          <div className="flex items-center">
+            {/* Premium Uploaded Logo (White lettering, transparent background) */}
+            <img 
+              src="/FUNDO - LETRA BRANCA - TRANS - HOR.png" 
+              alt="Ceruti.IA" 
+              className="h-8 sm:h-10 w-auto object-contain hover:opacity-90 transition-opacity"
+              referrerPolicy="no-referrer"
+            />
           </div>
 
           <nav className="hidden md:flex items-center gap-8 text-[10px] font-mono tracking-[0.2em] uppercase text-slate-400">
-            <a href="#info-card-0" className="hover:text-blue-400 transition-colors">Detalhes</a>
-            <a href="#learn-topic-0" className="hover:text-blue-400 transition-colors">Cronograma</a>
-            <a href="#cadastro-section" className="hover:text-blue-400 transition-colors">Inscrição</a>
+            <button 
+              onClick={() => handleScrollTo("programacao")} 
+              className="hover:text-blue-400 transition-colors cursor-pointer focus:outline-none"
+            >
+              Programação
+            </button>
+            <button 
+              onClick={() => handleScrollTo("modulos")} 
+              className="hover:text-blue-400 transition-colors cursor-pointer focus:outline-none"
+            >
+              Módulos
+            </button>
+            <button 
+              onClick={() => handleScrollTo("cadastro-section")} 
+              className="hover:text-blue-400 transition-colors cursor-pointer focus:outline-none"
+            >
+              Inscrição
+            </button>
           </nav>
 
           <div>
@@ -55,7 +74,7 @@ export default function App() {
               id="header-cta-btn"
               className="inline-flex items-center gap-1.5 px-4 py-1.5 border border-blue-500/50 rounded-full bg-blue-500/5 text-blue-400 hover:bg-blue-500/10 font-mono text-[10px] uppercase tracking-[0.15em] font-semibold transition-all duration-300 cursor-pointer"
             >
-              <span>Vagas Abertas</span>
+              <span>Confirmar presença</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-blue-400" />
             </button>
           </div>
@@ -63,7 +82,7 @@ export default function App() {
       </header>
 
       {/* Main Body */}
-      <main className="relative z-10">
+      <main className="relative z-10 pt-[88px]">
         {/* Dobra 1: Hero */}
         <HeroSection onCtaClick={handleCtaClick} />
 
@@ -83,13 +102,13 @@ export default function App() {
         
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-6 h-6 border border-blue-500 rotate-45 flex items-center justify-center">
-                <div className="w-2 h-2 bg-blue-500"></div>
-              </div>
-              <span className="font-display font-bold text-sm tracking-wider text-white uppercase ml-1">
-                Capacitação<span className="text-blue-500">.</span>IA
-              </span>
+            <div className="mb-4 flex justify-center md:justify-start">
+              <img 
+                src="/FUNDO - LETRA BRANCA - TRANS - HOR.png" 
+                alt="Ceruti.IA" 
+                className="h-6 sm:h-7 w-auto object-contain hover:opacity-90 transition-opacity"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <p className="text-xs text-gray-500 max-w-sm">
               Inovando o desenvolvimento de equipes comerciais com inteligência artificial generativa aplicada de forma prática e escalável.
@@ -97,7 +116,7 @@ export default function App() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 text-[10px] text-gray-600 uppercase tracking-widest font-mono">
-            <span>© 2026 Capacitação.IA. Todos os direitos reservados.</span>
+            <span>© 2026 Ceruti.IA. Todos os direitos reservados.</span>
             <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-blue-500/50" />
             <span>Workshop ao Vivo</span>
           </div>

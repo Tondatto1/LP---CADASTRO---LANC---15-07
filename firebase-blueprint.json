@@ -1,0 +1,17 @@
+{
+  "collections": [
+    {
+      "name": "registrations",
+      "rules": {
+        "read": "false",
+        "write": "true"
+      },
+      "schema": {
+        "name": "string",
+        "email": "string",
+        "whatsapp": "string",
+        "registeredAt": "string"
+      }
+    }
+  ]
+}

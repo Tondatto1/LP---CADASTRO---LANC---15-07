@@ -36,7 +36,7 @@ export default function LearningSection() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-[#040914] via-[#021812] to-[#020710] overflow-hidden border-b border-white/10">
+    <section id="modulos" className="relative py-24 px-6 bg-gradient-to-b from-[#040914] via-[#021812] to-[#020710] overflow-hidden border-b border-white/10">
       {/* High-End Tech Grid and Metallic Reflections */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-25 pointer-events-none" />
       

@@ -83,7 +83,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
             id="hero-cta-btn"
             className="group relative px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all duration-300 shadow-lg shadow-blue-900/30 uppercase tracking-widest text-xs flex items-center gap-3 cursor-pointer overflow-hidden active:scale-98"
           >
-            <span>Garantir minha vaga</span>
+            <span>Confirmar presença</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </motion.div>
