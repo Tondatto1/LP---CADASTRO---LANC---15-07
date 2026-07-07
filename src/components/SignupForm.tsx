@@ -58,6 +58,53 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
     setIsSubmitting(true);
 
     const calendarUrl = "https://calendar.app.google/UYp6Y9TtoW5Xd2L36";
+    // Abre uma nova aba de forma síncrona para evitar que o bloqueador de popups impeça a abertura
+    const calendarWindow = window.open("", "_blank");
+    if (calendarWindow) {
+      calendarWindow.document.write(`
+        <html>
+          <head>
+            <title>Redirecionando para a Agenda...</title>
+            <style>
+              body {
+                background-color: #050505;
+                color: #f1f5f9;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+              }
+              .spinner {
+                border: 3px solid rgba(255, 255, 255, 0.1);
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border-left-color: #3b82f6;
+                animation: spin 1s linear infinite;
+                margin-bottom: 20px;
+              }
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              p {
+                font-size: 14px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: #94a3b8;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="spinner"></div>
+            <p>Confirmando sua inscrição e abrindo a agenda...</p>
+          </body>
+        </html>
+      `);
+    }
 
     try {
       const newParticipant: Participant = {
@@ -74,20 +121,24 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
       try {
         await addDoc(collection(db, "registrations"), newParticipant);
       } catch (error) {
+        if (calendarWindow) calendarWindow.close();
         handleFirestoreError(error, OperationType.CREATE, "registrations");
       }
 
       // Save to localStorage
       localStorage.setItem("commercial_ai_workshop_registration", JSON.stringify(newParticipant));
 
-      // Direct and robust redirection in the current window.
-      // This is 100% reliable, does not open blank tabs (which can trigger DNS origin resolve errors),
-      // and is never blocked by popup blockers on any device/platform (PC or Mobile).
-      window.location.href = calendarUrl;
+      // Direct redirect in the new window, or fallback to current window if blocked
+      if (calendarWindow) {
+        calendarWindow.location.href = calendarUrl;
+      } else {
+        window.location.href = calendarUrl;
+      }
       
       setIsSubmitting(false);
       onSuccess(newParticipant);
     } catch (error) {
+      if (calendarWindow) calendarWindow.close();
       console.error("Error adding document: ", error);
       setErrorMsg("Ocorreu um erro ao salvar sua inscrição. Tente novamente.");
       setIsSubmitting(false);
