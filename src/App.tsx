@@ -36,7 +36,7 @@ export default function App() {
     <div className="relative min-h-screen bg-[#050505] text-slate-100 font-sans antialiased selection:bg-blue-500/30 selection:text-white">
       {/* Premium Header conforming to Geometric Balance */}
       <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-gradient-to-b from-[#020a16] via-[#011c13] to-[#040914]">
-        <div className="max-w-7xl mx-auto px-6 py-4 sm:py-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <div className="flex items-center">
             {/* Premium Uploaded Logo (White lettering, transparent background) */}
             <img 
@@ -82,7 +82,7 @@ export default function App() {
       </header>
 
       {/* Main Body */}
-      <main className="relative z-10 pt-[64px] sm:pt-[88px]">
+      <main className="relative z-10 pt-[88px]">
         {/* Dobra 1: Hero */}
         <HeroSection onCtaClick={handleCtaClick} />
 
