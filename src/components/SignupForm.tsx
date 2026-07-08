@@ -109,10 +109,14 @@ export default function SignupForm({ onSuccess }: SignupFormProps) {
   };
 
   return (
-    <section id="cadastro-section" className="relative py-28 px-6 bg-gradient-to-b from-[#020710] via-[#021812] to-[#010408] overflow-hidden border-b border-white/10">
-      {/* High-End Tech Grid and Metallic Reflections */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-25 pointer-events-none" />
+    <section id="cadastro-section" className="relative py-28 px-6 bg-gradient-to-b from-[#020710] via-[#021812] to-[#050505] overflow-hidden">
+      {/* High-End Tech Grid with mask to fade at top and bottom */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] opacity-25 pointer-events-none" />
       
+      {/* Seamless top and bottom color transitions */}
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#020710] via-[#020710]/60 to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent pointer-events-none z-10" />
+
       {/* Glowing Sophisticated Metallic Orbs */}
       <div className="absolute top-1/4 right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[120px] pointer-events-none" />

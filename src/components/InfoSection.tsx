@@ -34,18 +34,19 @@ export default function InfoSection() {
   ];
 
   return (
-    <section id="programacao" className="relative py-24 px-6 bg-gradient-to-b from-[#020a16] via-[#011c13] to-[#040914] overflow-hidden border-b border-white/10">
-      {/* High-End Tech Grid and Metallic Reflections */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-25 pointer-events-none" />
+    <section id="programacao" className="relative py-24 px-6 bg-gradient-to-b from-[#050505] via-[#011c13] to-[#040914] overflow-hidden">
+      {/* High-End Tech Grid with mask to fade at top and bottom */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] opacity-25 pointer-events-none" />
       
+      {/* Seamless top and bottom color transitions */}
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#050505] via-[#050505]/60 to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#040914] via-[#040914]/60 to-transparent pointer-events-none z-10" />
+
       {/* Glowing Sophisticated Metallic Orbs */}
       <div className="absolute -top-[10%] left-[5%] w-[450px] h-[450px] bg-emerald-500/20 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute -bottom-[10%] right-[5%] w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-gradient-to-r from-emerald-500/10 via-transparent to-blue-500/10 rounded-full blur-[110px] pointer-events-none" />
 
-      {/* Decorative Diagonal Metallic Line */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-blue-500/30 pointer-events-none" />
-      
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <motion.h2

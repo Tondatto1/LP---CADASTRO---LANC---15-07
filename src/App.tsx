@@ -104,7 +104,7 @@ export default function App() {
       </main>
 
       {/* Footer Area with Geometric Balance styling details */}
-      <footer className="relative bg-[#050505] border-t border-white/5 py-16 px-6 overflow-hidden">
+      <footer className="relative bg-[#050505] py-16 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] bg-[size:32px_32px] opacity-5 pointer-events-none" />
         
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">

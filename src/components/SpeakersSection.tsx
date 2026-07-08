@@ -20,10 +20,14 @@ export default function SpeakersSection() {
   ];
 
   return (
-    <section id="palestrantes" className="relative py-24 px-6 bg-gradient-to-b from-[#040914] via-[#02050b] to-[#050505] overflow-hidden border-b border-white/10">
-      {/* Premium background styling */}
-      <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] bg-[size:32px_32px] opacity-5 pointer-events-none" />
+    <section id="palestrantes" className="relative py-24 px-6 bg-gradient-to-b from-[#040914] via-[#02050b] to-[#050505] overflow-hidden">
+      {/* Premium background styling with mask to fade at top and bottom */}
+      <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] opacity-5 pointer-events-none" />
       
+      {/* Seamless top and bottom color transitions */}
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#040914] via-[#040914]/60 to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent pointer-events-none z-10" />
+
       {/* Subtle background glow effect */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />

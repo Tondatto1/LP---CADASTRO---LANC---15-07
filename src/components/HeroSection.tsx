@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onCtaClick }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[85vh] sm:min-h-screen flex flex-col justify-center items-center px-6 pt-32 pb-20 sm:pt-40 sm:pb-28 text-center overflow-hidden border-b border-white/10">
+    <section className="relative min-h-[85vh] sm:min-h-screen flex flex-col justify-center items-center px-6 pt-32 pb-20 sm:pt-40 sm:pb-28 text-center overflow-hidden">
       {/* Lightfall dynamic background effect */}
       <div className="absolute inset-0 z-0 opacity-40">
         <Lightfall
@@ -32,6 +32,9 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
 
       {/* Decorative High-End Ambient Lighting & Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
+
+      {/* Seamless transition fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent pointer-events-none z-10" />
 
       
       {/* Metallic Blue Glow Spots matching design spec */}
